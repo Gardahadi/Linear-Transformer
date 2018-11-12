@@ -29,7 +29,7 @@ def draw_cube():
     # Top face (y = 0.5)
     # Define vertices in counter-clockwise (CCW) order with normal pointing out
     glColor3f(0.0, 1.0, 0.0)     # Green
-    glVertex3f( 0.5, 0.5, -0.5)
+    glVertex3f(0.5, 0.5, -0.5)
     glVertex3f(-0.5, 0.5, -0.5)
     glVertex3f(-0.5, 0.5,  0.5)
     glVertex3f( 0.5, 0.5,  0.5)
@@ -77,9 +77,8 @@ def draw():                                            # ondraw is called all th
     gluLookAt(0, 0, 0, -100.0, -100.0, -100.0, 0.0,-1.0,0.0)
     draw_cube()
     glRotatef(anglePyramid, 0.0, 0.0, 1.0)
-    draw_rect()
 
-    anglePyramid += 0.01
+    anglePyramid += 99
 
     glutSwapBuffers()                                  # important for double buffering
 
