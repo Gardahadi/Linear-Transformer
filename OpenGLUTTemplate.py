@@ -2,9 +2,12 @@
 from OpenGL.GL import *
 from OpenGL.GLUT import *
 from OpenGL.GLU import *
+import time
+import idle
 
 window = 0                                             # glut window number
 width, height = 500, 400                               # window size
+<<<<<<< HEAD
 anglePyramid = 0
 
 def draw_axis():
@@ -81,14 +84,15 @@ def draw():                                            # ondraw is called all th
     anglePyramid += 99
 
     glutSwapBuffers()                                  # important for double buffering
+=======
+>>>>>>> 7890a2f4607f538525cc14cf03e6eae5df7353d8
 
 # initialization
 glutInit()                                             # initialize glut
 glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_ALPHA | GLUT_DEPTH)
 glutInitWindowSize(width, height)                      # set window size
 glutInitWindowPosition(0, 0)                           # set window position
-window = glutCreateWindow("Boilerplate OpenGL")                  # create window with title
-glEnable(GL_DEPTH_TEST)                                # remove unseen faces
-glutDisplayFunc(draw)                                  # set draw function callback
-glutIdleFunc(draw)                                     # draw all the time
+window = glutCreateWindow("Boilerplate OpenGL")        # create window with title
+glutDisplayFunc(idle.draw)                                  # set draw function callback
+glutIdleFunc(idle.idle)                                     # draw all the time
 glutMainLoop()
