@@ -5,17 +5,23 @@ def translate(dx,dy,points) :
         P[0] += dx
         P[1] += dy
 
-def shear(param,k,points) :
-    if (param == 'x') :
+def shear(sb,k,points) :
+    if (sb == 'x') :
         for P in points :
+<<<<<<< HEAD
             points[1] += k*points[0]
     elif (param == 'y') :
+=======
+            P[0] += k*P[1]
+    elif (sb == 'y') :
+>>>>>>> 77842d7768a8e7580d9dafaa6257d6a1cd3d1c33
         for P in points :
-            points[0] +=  k*points[1]
+            P[1] +=  k*P[0]
 
-def stretch(param,k,points) :
-    if (param == 'x') :
+def stretch(sb,k,points) :
+    if (sb == 'x') :
         for P in points :
+<<<<<<< HEAD
             points[1] = k*points[1]
 
 def dilate(k,points) :
@@ -59,3 +65,17 @@ def reflect(param,points) :
             temp1 = P[1]
             P[0] = 2*a - temp0
             P[1] = 2*b - temp1
+=======
+            P[0] = k*P[0]
+    elif (sb == 'y') :
+        for P in points :
+            P[1] = k*P[1]
+
+def custom (a,b,c,d,points) :
+
+    for P in points :
+        X = P[0]
+        Y = P[1]
+        P[0] = X*a + Y*b
+        P[1] = X*c + Y*d
+>>>>>>> 77842d7768a8e7580d9dafaa6257d6a1cd3d1c33

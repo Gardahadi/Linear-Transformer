@@ -1,8 +1,8 @@
 from OpenGL.GL import *
 from OpenGL.GLUT import *
 from OpenGL.GLU import *
-import time
 import transform as Tf
+import time
 
 points = []
 pointsInit = []
@@ -17,7 +17,7 @@ def get_points():
         x = float(x)
         y = float(y)
         pointsInit.append([x,y])
-    points = pointsInit
+        points.append([x,y])
 
 def draw_axis():
     glBegin(GL_LINES)
@@ -37,6 +37,7 @@ def draw_poly():
     glEnd()
 
 def idle():
+    global points
     cmd = input("$")
     if cmd=="reset":
         points = pointsInit
@@ -71,15 +72,20 @@ def animator(trcommand):
                 Tf.rotate(ddeg,a,b,points)
             elif trtype=="shear":
                 sb,k = params.split(" ")
-                k = pow(float(k),1/frames)
-                #Tf.shear(sb,k,points)
+                k = float(k)/frames
+                Tf.shear(sb,k,points)
             elif trtype=="stretch":
                 sb,k = params.split(" ")
-                k = pow(float(k),1/frames)
-                #Tf.stretch(sb,k,points)
+                k = pow(abs(float(k)),1/frames)*(float(k)/abs(float(k)))
+                print("{:.2f}".format(k))
+                Tf.stretch(sb,k,points)
             elif trtype=="custom":
                 a,b,c,d = params.split(" ")
-                #Tf.custom(a,b,c,d,points)
+                a = float(a)
+                b = float(b)
+                c = float(c)
+                d = float(d)
+                Tf.custom(a,b,c,d,points)
             time.sleep(0.01)
             draw()
     elif trtype=="multiple":

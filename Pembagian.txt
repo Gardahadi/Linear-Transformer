@@ -3,19 +3,21 @@ Pembagian Tugs SKIDIPAPKUY
 
 Translasi - Done
 
+TUGAS 2D : SELESAI!!
 Draw
   1. Draw Axis - Done
   2. Draw 2D - Done
-  3. Draw 3D
-  4. Exit - Done
+  3. Exit - Done
 Animation - Tude
 
 Functions
   1. Translate - Done
-  2. Dilatasi - Rojap
-  3. Rotasi - Rojap
-  4. Refleksi - Rojap
-  5. Sheer - Garda
-  6. Stretch - Garda
-  7. Custom - Garda
+  2. Dilatasi - Rojap - Done
+  3. Rotasi - Rojap - Done
+  4. Refleksi - Rojap - DOne
+  5. Sheer - Garda - Done
+  6. Stretch - Garda - Done
+  7. Custom - Garda - 1/2 (BELUM ANIMASI(????))
   8. Reset - Done
+
+TUGAS 3D :
