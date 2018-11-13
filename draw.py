@@ -72,12 +72,13 @@ def animator(trcommand):
                 #Tf.reflect()
             elif trtype=="shear":
                 sb,k = params.split(" ")
-                k = pow(float(k),1/frames)
-                #Tf.shear(sb,k,points)
+                k = float(k)/frames
+                Tf.shear(sb,k,points)
             elif trtype=="stretch":
                 sb,k = params.split(" ")
-                k = pow(float(k),1/frames)
-                #Tf.stretch(sb,k,points)
+                k = pow(abs(float(k)),1/frames)*(float(k)/abs(float(k)))
+                print("{:.2f}".format(k))
+                Tf.stretch(sb,k,points)
             elif trtype=="custom":
                 a,b,c,d = params.split(" ")
                 #Tf.custom(a,b,c,d,points)
