@@ -51,7 +51,9 @@ def animator(trcommand):
     global points, frames
     trtype = trcommand.split(" ")[0]
     params = trcommand.split(" ",1)[1]
-    if trcommand!="multiple":
+    if trtype=="reflect":
+        Tf.reflect(params,points)
+    elif trcommand!="multiple":
         for i in range(frames):
             if trtype=="translate":
                 dx,dy = params.split(" ")
@@ -60,16 +62,13 @@ def animator(trcommand):
                 Tf.translate(dx,dy,points)
             elif trtype=="dilate":
                 dparams = pow(float(params),1/frames)
-                #Tf.dilate(dparams,points)
+                Tf.dilate(dparams,points)
             elif trtype=="rotate":
                 deg,a,b = params.split(" ")
                 ddeg = float(deg)/frames
                 a = float(a)
                 b = float(b)
-                #Tf.rotate(ddeg,a,b,points)
-            #elif trtype=="reflect":
-                # TODO: Tentuin parameter refleksi untuk 5 jenis
-                #Tf.reflect()
+                Tf.rotate(ddeg,a,b,points)
             elif trtype=="shear":
                 sb,k = params.split(" ")
                 k = pow(float(k),1/frames)
