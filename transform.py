@@ -6,13 +6,12 @@ def translate(dx,dy,points) :
 def shear(param,k,points) :
     if (param == 'x') :
         for P in points :
-            points[1] += k*points[0]
-    else if (param == 'y') :
+            P[1] += k*P[0]
+    elif (param == 'y') :
         for P in points :
-            points[0] +=  k*points[1]
+            P[0] +=  k*P[1]
 
 def stretch(param,k,points) :
     if (param == 'x') :
         for P in points :
             points[1] = k*points[1]
-    else if (param)
