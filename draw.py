@@ -82,7 +82,11 @@ def animator(trcommand):
                 Tf.stretch(sb,k,points)
             elif trtype=="custom":
                 a,b,c,d = params.split(" ")
-                #Tf.custom(a,b,c,d,points)
+                a = float(a)
+                b = float(b)
+                c = float(c)
+                d = float(d)
+                Tf.custom(a,b,c,d,points)
             time.sleep(0.01)
             draw()
     elif trtype=="multiple":

@@ -19,4 +19,10 @@ def stretch(sb,k,points) :
         for P in points :
             P[1] = k*P[1]
 
-def custom(p1)
+def custom (a,b,c,d,points) :
+
+    for P in points :
+        X = P[0]
+        Y = P[1]
+        P[0] = X*a + Y*b
+        P[1] = X*c + Y*d

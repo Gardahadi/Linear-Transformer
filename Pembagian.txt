@@ -12,10 +12,10 @@ Animation - Tude
 
 Functions
   1. Translate - Done
-  2. Dilatasi - Rojap
+  2. Dilatasi - Rojap - Done
   3. Rotasi - Rojap
   4. Refleksi - Rojap
-  5. Sheer - Garda
-  6. Stretch - Garda
-  7. Custom - Garda
+  5. Sheer - Garda - Done
+  6. Stretch - Garda - Done
+  7. Custom - Garda - 1/2
   8. Reset - Done
