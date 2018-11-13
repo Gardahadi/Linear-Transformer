@@ -2,10 +2,17 @@ from OpenGL.GL import *
 from OpenGL.GLUT import *
 from OpenGL.GLU import *
 import time
+import transform as T
 
 points = [[0,0.5],[0.5,0],[0,-0.5],[-0.5,0]]
+
+
+
+
+
 pointsInit = [[0,0.5],[0.5,0],[0,-0.5],[-0.5,0]]
 rgb = [0.3,0.5,0.7]
+
 
 def draw_axis():
     glBegin(GL_LINES)
@@ -45,9 +52,7 @@ def idle():
         dy = float(dy)
         frames = 60
         for i in range(frames):
-            for p in points:
-                p[0] += dx/frames
-                p[1] += dy/frames
+            T.translate(dx,dy,points)
             time.sleep(0.01)
             draw()
     elif cmd[0]=="r":

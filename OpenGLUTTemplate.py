@@ -7,8 +7,10 @@ import idle
 
 window = 0                                             # glut window number
 width, height = 500, 400                               # window size
-<<<<<<< HEAD
 anglePyramid = 0
+
+
+
 
 def draw_axis():
     glBegin(GL_LINES)
@@ -84,8 +86,7 @@ def draw():                                            # ondraw is called all th
     anglePyramid += 99
 
     glutSwapBuffers()                                  # important for double buffering
-=======
->>>>>>> 7890a2f4607f538525cc14cf03e6eae5df7353d8
+
 
 # initialization
 glutInit()                                             # initialize glut
