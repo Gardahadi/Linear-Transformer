@@ -1,8 +1,8 @@
 from OpenGL.GL import *
 from OpenGL.GLUT import *
 from OpenGL.GLU import *
-import time
 import transform as Tf
+import time
 
 points = []
 pointsInit = []
@@ -17,7 +17,7 @@ def get_points():
         x = float(x)
         y = float(y)
         pointsInit.append([x,y])
-    points = pointsInit
+        points.append([x,y])
 
 def draw_axis():
     glBegin(GL_LINES)
@@ -37,6 +37,7 @@ def draw_poly():
     glEnd()
 
 def idle():
+    global points
     cmd = input("$")
     if cmd=="reset":
         points = pointsInit
