@@ -18,3 +18,5 @@ def stretch(sb,k,points) :
     elif (sb == 'y') :
         for P in points :
             P[1] = k*P[1]
+
+def custom(p1)
