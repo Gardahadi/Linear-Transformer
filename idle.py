@@ -52,7 +52,7 @@ def idle():
         dy = float(dy)
         frames = 60
         for i in range(frames):
-            T.translate(dx,dy,points)
+            T.translate(dx/frames,dy/frames,points)
             time.sleep(0.01)
             draw()
     elif cmd[0]=="r":
