@@ -6,7 +6,7 @@ Translasi - Done
 Draw
   1. Draw Axis - Done
   2. Draw 2D - Done
-  3. Draw 3D
+  3. Draw 3D - 
   4. Exit - Done
 Animation - Tude
 
