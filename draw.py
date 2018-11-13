@@ -47,14 +47,13 @@ def idle():
         animator(cmd)
     draw()
 
-## UNCOMMENT FUNGSI YANG SUDAH DIIMPLEMENTASIKAN
 def animator(trcommand):
     global points, frames
     trtype = trcommand.split(" ")[0]
     params = trcommand.split(" ",1)[1]
     if trtype=="reflect":
         Tf.reflect(params,points)
-    elif trcommand!="multiple":
+    elif trtype!="multiple":
         for i in range(frames):
             if trtype=="translate":
                 dx,dy = params.split(" ")

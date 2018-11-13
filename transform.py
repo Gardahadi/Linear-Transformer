@@ -61,10 +61,6 @@ def reflect(param,points) :
             temp1 = P[1]
             P[0] = 2*a - temp0
             P[1] = 2*b - temp1
-            P[0] = k*P[0]
-    elif (sb == 'y') :
-        for P in points :
-            P[1] = k*P[1]
 
 def custom (a,b,c,d,points) :
     for P in points :
