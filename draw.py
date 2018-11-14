@@ -22,10 +22,10 @@ def get_points():
 def draw_axis():
     glBegin(GL_LINES)
     glColor3f(1,1,1)
-    glVertex2f(-10,0)
-    glVertex2f(10,0)
-    glVertex2f(0,10)
-    glVertex2f(0,-10)
+    glVertex2f(-500,0)
+    glVertex2f(500,0)
+    glVertex2f(0,500)
+    glVertex2f(0,-500)
     glEnd()
 
 def draw_poly():
@@ -40,7 +40,9 @@ def idle():
     global points
     cmd = input("$")
     if cmd=="reset":
-        points = pointsInit
+        points = []
+        for p in pointsInit:
+            points.append([p[0],p[1]])
     elif cmd=="exit":
         exit()
     else:
@@ -101,6 +103,7 @@ def animator(trcommand):
 def draw():                                            # ondraw is called all the time
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT) # clear the screen
     glLoadIdentity()                                   # reset position
+    glOrtho(-500,500,-500,500,0,1)
     glColor3f(rgb[0],rgb[1],rgb[2])
     draw_poly()
     draw_axis()
