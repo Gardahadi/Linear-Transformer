@@ -89,9 +89,14 @@ def animator(trcommand):
             draw()
     elif trtype=="multiple":
         n = int(params)
+        cmdlist = []
         for i in range(n):
             cmd = input("...")
-            animator(cmd)
+            cmdlist.append(cmd)
+        for cmddo in cmdlist:
+            animator(cmddo)
+            time.sleep(0.5)
+
 
 def draw():                                            # ondraw is called all the time
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT) # clear the screen
