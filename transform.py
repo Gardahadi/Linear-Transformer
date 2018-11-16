@@ -69,5 +69,3 @@ def custom(a,b,c,d,points) :
         Y = P[1]
         P[0] = X*a + Y*b
         P[1] = X*c + Y*d
-
-def rotate3D()

@@ -3,7 +3,7 @@
 import math
 import copy
 
-p = [0,1,1,0]
+p = [0,0,1,1]
 q=[math.cos(math.radians(45)),0,math.sin(math.radians(45)),0]
 q1=[math.cos(math.radians(45)),0,-math.sin(math.radians(45)),0]
 
@@ -33,12 +33,13 @@ def productQ(Q1,Q2) :
   # Product 5 : V1 x V2
   CrossProduct.append(Q1[2]*Q2[3]-Q1[3]*Q2[2])
   CrossProduct.append(Q1[1]*Q2[3]-Q1[3]*Q2[1])
-  CrossProduct.append(Q1[1]*Q2[2]-Q1[2]*Q1[1])
+  CrossProduct.append(Q1[1]*Q2[2]-Q1[2]*Q2[1])
 
-  ReturnQ.append(TempQ1[1]+TempQ2[1]+CrossProduct[0])
-  ReturnQ.append(TempQ1[2]+TempQ2[2]+CrossProduct[1])
-  ReturnQ.append(TempQ1[3]+TempQ2[3]+CrossProduct[2])
-  ReturnQ.append(P1 - P2)
+  ReturnQ.append(round((P1 - P2)))
+  ReturnQ.append(round(TempQ1[1]+TempQ2[1]+CrossProduct[0]))
+  ReturnQ.append(round(TempQ1[2]+TempQ2[2]+CrossProduct[1]))
+  ReturnQ.append(round(TempQ1[3]+TempQ2[3]+CrossProduct[2]))
+
 
   return ReturnQ
 
