@@ -1,17 +1,41 @@
 import math
 
-def translate(dx,dy,points) :
+def translate(points,dx,dy,dz=None) :
     for P in points :
         P[0] += dx
         P[1] += dy
+        if dz!=None:
+            P[2] += dz
 
-def shear(sb,k,points) :
+def shear(points,sb,k,k2=None) :
     if (sb == 'x') :
         for P in points :
             P[0] += k*P[1]
+            if len(P) == 3:
+                P[0] += k*P[2]
     elif (sb == 'y') :
         for P in points :
             P[1] +=  k*P[0]
+            if len(P) == 3:
+                P[1] += k*P[2]
+    elif (len(points[0]) == 3):
+        if k2==None:
+            k2 = k
+        if (sb == 'z') :
+            for P in points :
+                P[2] +=  k*P[0] + k*P[1]
+        elif (sb == 'xy') :
+            for P in points :
+                P[0] += k*P[2]
+                P[1] += k2*P[2]
+        elif (sb == 'xz') :
+            for P in points :
+                P[0] += k*P[1]
+                P[2] += k2*P[1]
+        elif (sb == 'yz') :
+            for P in points :
+                P[1] += k*P[0]
+                P[2] += k2*P[0]
 
 def stretch(sb,k,points) :
     if (sb == 'x') :
@@ -21,10 +45,12 @@ def stretch(sb,k,points) :
         for P in points :
             P[1] = k*P[1]
 
-def dilate(k,points) :
+def dilate(points,k) :
     for P in points :
         P[0] *= k
         P[1] *= k
+        if len(P)==3:
+            P[2] *= k
 
 def rotate(deg,a,b,points) :
     rad = float(deg*0.0174533)
