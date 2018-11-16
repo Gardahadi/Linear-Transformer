@@ -43,26 +43,16 @@ def stretch(points,sb,k) :
             P[0] *= k
     elif (sb == 'y') :
         for P in points :
-<<<<<<< HEAD
             P[1] *= k
     elif (sb == 'z') :
         for P in points :
             P[2] *= k
-
-def dilate(k,points) :
-    for P in points :
-        P[0] *= k
-        P[1] *= k
-        if len(P)==3 :
-=======
-            P[1] = k*P[1]
 
 def dilate(points,k) :
     for P in points :
         P[0] *= k
         P[1] *= k
         if len(P)==3:
->>>>>>> 898143b61266881bbc35f5ac3cd74f82aee53e61
             P[2] *= k
 
 def rotate(points,deg,a,b) :
@@ -102,23 +92,15 @@ def reflect(points,param) :
             P[0] = 2*a - temp0
             P[1] = 2*b - temp1
 
-<<<<<<< HEAD
-def custom(a,b,c,d,points) :
-=======
-
 def custom(points,a,b,c,d) :
->>>>>>> 898143b61266881bbc35f5ac3cd74f82aee53e61
     for P in points :
         X = P[0]
         Y = P[1]
         P[0] = X*a + Y*b
         P[1] = X*c + Y*d
-<<<<<<< HEAD
 
 def rotate3D(deg,a,b,c,points) :
     for P in points :
         temp = P
         P = productQ(productQ([math.cos(math.radians(deg)), math.sin(math.radians(deg))*a, math.sin(math.radians(deg))*b, math.sin(math.radians(deg))*c]))
 
-=======
->>>>>>> 898143b61266881bbc35f5ac3cd74f82aee53e61
