@@ -16,14 +16,20 @@ def shear(sb,k,points) :
 def stretch(sb,k,points) :
     if (sb == 'x') :
         for P in points :
-            P[0] = k*P[0]
+            P[0] *= k
     elif (sb == 'y') :
         for P in points :
-            P[1] = k*P[1]
+            P[1] *= k
+    elif (sb == 'z') :
+        for P in points :
+            P[2] *= k
+
 def dilate(k,points) :
     for P in points :
         P[0] *= k
         P[1] *= k
+        if len(P)==3 :
+            P[2] *= k
 
 def rotate(deg,a,b,points) :
     rad = float(deg*0.0174533)
@@ -62,7 +68,6 @@ def reflect(param,points) :
             P[0] = 2*a - temp0
             P[1] = 2*b - temp1
 
-
 def custom(a,b,c,d,points) :
     for P in points :
         X = P[0]
@@ -70,4 +75,8 @@ def custom(a,b,c,d,points) :
         P[0] = X*a + Y*b
         P[1] = X*c + Y*d
 
-def rotate3D()
+def rotate3D(deg,a,b,c,points) :
+    for P in points :
+        temp = P
+        P = productQ(productQ([math.cos(math.radians(deg)), math.sin(math.radians(deg))*a, math.sin(math.radians(deg))*b, math.sin(math.radians(deg))*c]))
+
