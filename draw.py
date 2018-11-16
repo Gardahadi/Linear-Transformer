@@ -165,14 +165,14 @@ def animator(trcommand):
     trtype = trcommand.split(" ")[0]
     params = trcommand.split(" ",1)[1]
     if trtype=="reflect":
-        Tf.reflect(params,points)
+        Tf.reflect(points,params)
     elif trtype=="custom":
         a,b,c,d = params.split(" ")
         a = float(a)
         b = float(b)
         c = float(c)
         d = float(d)
-        Tf.custom(a,b,c,d,points)
+        Tf.custom(points,a,b,c,d)
     elif trtype=="multiple":
         n = int(params)
         cmdlist = []
@@ -201,7 +201,7 @@ def animator(trcommand):
                 ddeg = float(deg)/frames
                 a = float(a)
                 b = float(b)
-                Tf.rotate(ddeg,a,b,points)
+                Tf.rotate(points,ddeg,a,b)
             elif trtype=="shear":
                 sb = params.split(" ")[0]
                 k = params.split(" ")[1]
@@ -217,7 +217,7 @@ def animator(trcommand):
             elif trtype=="stretch":
                 sb,k = params.split(" ")
                 k = pow(abs(float(k)),1/frames)*(float(k)/abs(float(k)))
-                Tf.stretch(sb,k,points)
+                Tf.stretch(points,sb,k)
             time.sleep(0.01)
             draw()
 
