@@ -89,6 +89,7 @@ def reflect(param,points) :
             P[0] = 2*a - temp0
             P[1] = 2*b - temp1
 
+
 def custom(a,b,c,d,points) :
     for P in points :
         X = P[0]

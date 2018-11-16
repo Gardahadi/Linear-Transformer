@@ -139,6 +139,7 @@ def draw_cube():
 
 def idle():
     global points,rgb
+    #The cmd Variable will store input from user
     cmd = input("$ ")
     if cmd=="reset":
         if mode=='2':
