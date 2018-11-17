@@ -1,4 +1,5 @@
 import math
+import quaternion as q
 
 def translate(points,dx,dy,dz=None) :
     for P in points :
@@ -99,8 +100,53 @@ def custom(points,a,b,c,d) :
         P[0] = X*a + Y*b
         P[1] = X*c + Y*d
 
-def rotate3D(deg,a,b,c,points) :
-    for P in points :
-        temp = P
-        P = productQ(productQ([math.cos(math.radians(deg)), math.sin(math.radians(deg))*a, math.sin(math.radians(deg))*b, math.sin(math.radians(deg))*c]))
 
+def rotate3D(points,deg,a,b,c) :
+    #Make a,b,c as unit vector
+    a = a/(a**2+b**2+c**2)**(1/2)
+    b = b/(a**2+b**2+c**2)**(1/2)
+    c = c/(a**2+b**2+c**2)**(1/2)
+    Q = [math.sin(math.radians(deg/2))*a, math.sin(math.radians(deg/2))*b, math.sin(math.radians(deg/2))*c,math.cos(math.radians(deg/2))]
+    InverseQ = [-math.sin(math.radians(deg/2))*a, -math.sin(math.radians(deg/2))*b, -math.sin(math.radians(deg/2))*c,math.cos(math.radians(deg/2))]
+    for P in points :
+        # p' = q * p * q-1
+        P.append(0)
+        X = q.productQ(q.productQ(Q,P),InverseQ)
+        P[0] = X[0]
+        P[1] = X[1]
+        P[2] = X[2]
+
+def custom3D(points,a,b,c,d,e,f,g,h,i) :
+    for P in points :
+        X = P[0]
+        Y = P[1]
+        Z = P[2]
+        P[0] = X*a + Y*b + Z*c
+        P[1] = X*d + Y*e + Z*f
+        P[2] = X*g + Y*h + Z*i
+
+def reflect3D(points,param) :
+    if param=="xy" :
+        for P in points:
+            temp = P[2]
+            P[2] = -temp
+    elif param=="yz" :
+        for P in points:
+            temp = P[0]
+            P[0] = -temp
+    elif param=="xz" :
+        for P in points:
+            temp = P[1]
+            P[1] = -temp
+    else:
+        a,b,c = param[1:][:-1].split(",")
+        a = float(a)
+        b = float(b)
+        c = float(c)
+        for P in points :
+            temp1 = P[0]
+            temp2 = P[1]
+            temp3 = P[2]
+            P[0] = 2*a - temp1
+            P[1] = 2*b - temp2
+            P[2] = 2*c - temp3

@@ -16,22 +16,27 @@ cubeInit = [[100,100,100],
         [-100,-100,100]]
 mode = ''
 rgb = [0.9,0.9,0.8]
+validCmd = ["reflect","custom","multiple","translate","dilate","rotate","shear","stretch"]
 frames = 100
 
 def initDraw():
     global mode
     mode = input("Pilih Mode [2]D atau [3]D: ")
+    while mode!='2' and mode!='3' and mode!='exit':
+        mode = input("Input tidak valid! Pilih Mode [2]D atau [3]D: ")
+
     if mode=='2':
-        get_points()
-        glutIdleFunc(idle)                                     # draw all the time
-    elif mode=='3':
-        glEnable(GL_DEPTH_TEST)                                # remove unseen faces
-        for P in cubeInit:
-            points.append([P[0],P[1],P[2]])
+        get_points()                                           # 2D Points initialization
         glutIdleFunc(idle)
-    else:
+    elif mode=='3':
+        glEnable(GL_DEPTH_TEST)                                # Remove unseen faces
+        for P in cubeInit:
+            points.append([P[0],P[1],P[2]])                    # 3D Points initialization
+        glutIdleFunc(idle)
+    elif mode=='exit':
         exit()
-    glutDisplayFunc(draw)                                  # set draw function callback
+
+    glutDisplayFunc(draw)                                  # Set draw function callback
 
 def get_points():
     global pointsInit, points
@@ -137,10 +142,38 @@ def draw_cube():
 
     glEnd()
 
+def displayHelp():
+    print("\nSumbu merah : X+")
+    print("Sumbu hijau : Y+")
+    if mode=='3':
+        print("Sumbu biru : Z+")
+    print("\nList Command :")
+    if mode=='2':
+        print("    translate <dx> <dy>	  ")
+        print("    dilate <k>		      ")
+        print("    rotate <deg> <a> <b>	  ")
+        print("    reflect <x|y|x=y|x=-y|(<a>,<b>)>")
+        print("    shear <x|y> <k>		  ")
+        print("    stretch <x|y> <k>	  ")
+        print("    custom <a> <b> <c> <d> ")
+        print("    color                  ")
+    elif mode=='3':
+        print("    translate <dx> <dy> <dz> ")
+        print("    dilate <k>		        ")
+        print("    rotate <deg> <a> <b> <c> ")
+        print("    reflect <xy | yz | xz | (<a>,<b>,<c>)>      ")
+        print("    shear <x | y | z | xy | yz | xz> <k> [<k2>] ")
+        print("    stretch <x|y|z> <k>	      ")
+        print("    custom <a b c d e f g h i> ")
+    print("    multiple <n>	")
+    print("    reset		")
+    print("    exit			\n")
+
 def idle():
     global points,rgb
-    #The cmd Variable will store input from user
+    #The cmd variable will store input from user
     cmd = input("$ ")
+
     if cmd=="reset":
         if mode=='2':
             points = []
@@ -150,89 +183,129 @@ def idle():
             points = []
             for p in cubeInit:
                 points.append([p[0],p[1],p[2]])
+
     elif cmd=="color":
         rgb[0] = float(input("New R Value :"))
         rgb[1] = float(input("New G Value :"))
         rgb[2] = float(input("New B Value :"))
+
+    elif cmd=="help" or cmd=="?":
+        displayHelp()
+
     elif cmd=="exit":
         exit()
+
     else:
         animator(cmd)
     draw()
 
 def animator(trcommand):
     global points, frames
-    trtype = trcommand.split(" ")[0]
-    params = trcommand.split(" ",1)[1]
-    if trtype=="reflect":
-        Tf.reflect(points,params)
-    elif trtype=="custom":
-        a,b,c,d = params.split(" ")
-        a = float(a)
-        b = float(b)
-        c = float(c)
-        d = float(d)
-        Tf.custom(points,a,b,c,d)
-    elif trtype=="multiple":
-        n = int(params)
-        cmdlist = []
-        for i in range(n):
-            cmd = input("... ")
-            cmdlist.append(cmd)
-        for cmddo in cmdlist:
-            animator(cmddo)
-            time.sleep(0.5)
-    else:
-        for i in range(frames):
-            if trtype=="translate":
-                deltas = params.split(" ")
-                dx = float(deltas[0])/frames
-                dy = float(deltas[1])/frames
-                if mode=='3':
-                    dz = float(deltas[2])/frames
-                    Tf.translate(points,dx,dy,dz)
-                elif mode=='2':
-                    Tf.translate(points,dx,dy)
-            elif trtype=="dilate":
-                dparams = pow(float(params),1/frames)
-                Tf.dilate(points,dparams)
-            elif trtype=="rotate":
-                deg,a,b = params.split(" ")
-                ddeg = float(deg)/frames
+    try:
+        trtype = trcommand.split(" ")[0]
+        params = trcommand.split(" ",1)[1]
+        if trtype=="reflect":
+            if mode=='2':
+                Tf.reflect(points,params)
+            elif mode=='3' :
+                Tf.reflect3D(points,params)
+
+        elif trtype=="custom":
+            if mode=='2':
+                a,b,c,d = params.split(" ")
                 a = float(a)
                 b = float(b)
-                Tf.rotate(points,ddeg,a,b)
-            elif trtype=="shear":
-                sb = params.split(" ")[0]
-                k = params.split(" ")[1]
-                k = float(k)/frames
-                if mode=='3':
-                    try:
-                        k2 = float(params.split(" ")[2])/frames
-                        Tf.shear(points,sb,k,k2)
-                    except:
+                c = float(c)
+                d = float(d)
+                Tf.custom(points,a,b,c,d)
+            elif mode=='3' :
+                a,b,c,d,e,f,g,h,i = params.split(" ")
+                a = float(a)
+                b = float(b)
+                c = float(c)
+                d = float(d)
+                e = float(e)
+                f = float(f)
+                g = float(g)
+                h = float(h)
+                i = float(i)
+                Tf.custom3D(points,a,b,c,d,e,f,g,h,i)
+
+        elif trtype=="multiple":
+            n = int(params)
+            cmdlist = []
+            for i in range(n):          #Put all command in list
+                cmd = input("... ")
+                cmdlist.append(cmd)
+            for cmddo in cmdlist:       #Run all command from list
+                animator(cmddo)
+                time.sleep(0.5)
+        else:
+            for i in range(frames):                 #Animate by splitting single transformation into <frames> transformation
+                if trtype=="translate":
+                    deltas = params.split(" ")
+                    dx = float(deltas[0])/frames
+                    dy = float(deltas[1])/frames
+                    if mode=='3':
+                        dz = float(deltas[2])/frames
+                        Tf.translate(points,dx,dy,dz)
+                    elif mode=='2':
+                        Tf.translate(points,dx,dy)
+
+                elif trtype=="dilate":
+                    dparams = pow(float(params),1/frames)
+                    Tf.dilate(points,dparams)
+
+                elif trtype=="rotate":
+                    if mode=='2':
+                        deg,a,b = params.split(" ")
+                        ddeg = float(deg)/frames
+                        a = float(a)
+                        b = float(b)
+                        Tf.rotate(points,ddeg,a,b)
+                    elif mode=='3':
+                        deg,a,b,c = params.split(" ")
+                        ddeg = float(deg)/frames
+                        a = float(a)
+                        b = float(b)
+                        c = float(c)
+                        Tf.rotate3D(points,ddeg,a,b,c)
+
+                elif trtype=="shear":
+                    sb = params.split(" ")[0]
+                    k = params.split(" ")[1]
+                    k = float(k)/frames
+                    if mode=='3':
+                        try:
+                            k2 = float(params.split(" ")[2])/frames
+                            Tf.shear(points,sb,k,k2)
+                        except:
+                            Tf.shear(points,sb,k)
+                    elif mode=='2':
                         Tf.shear(points,sb,k)
-                elif mode=='2':
-                    Tf.shear(points,sb,k)
-            elif trtype=="stretch":
-                sb,k = params.split(" ")
-                k = pow(abs(float(k)),1/frames)*(float(k)/abs(float(k)))
-                Tf.stretch(points,sb,k)
-            time.sleep(0.01)
-            draw()
+
+                elif trtype=="stretch":
+                    sb,k = params.split(" ")
+                    k = pow(abs(float(k)),1/frames)*(float(k)/abs(float(k)))
+                    Tf.stretch(points,sb,k)
+
+                time.sleep(0.01)                #Frame-to-frame delay time
+                draw()                          #Redraw canvas
+    except:
+        print("Unknown command. Type '?' or 'help' for help")
 
 
-def draw():                                            # ondraw is called all the time
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT) # clear the screen
-    glLoadIdentity()                                   # reset position
-    if mode=='2':
+def draw():
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT) # Clear the screen
+    glLoadIdentity()                                   # Reset position
+    if mode=='2':                                      # 2D Mode
         glOrtho(-500,500,-500,500,0,1)
         draw_axis()
         glColor3f(rgb[0], rgb[1], rgb[2])
         draw_poly()
-    elif mode=='3':
+    elif mode=='3':                                    # 3D Mode, hardcoded shape
         glOrtho(-500,500,-500,500,-1000,1000)
         gluLookAt(0, 0, 0, -45.0, -75.0, -100.0, 0.0,1.0,0.0)
         draw_axis3()
         draw_cube()
-    glutSwapBuffers()                                  # important for double buffering
+    glutSwapBuffers()
