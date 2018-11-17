@@ -255,7 +255,6 @@ def animator(trcommand):
                 Tf.custom(points,a,b,c,d)
             elif mode=='3' :
                 passparam = params.split(" ")
-                print(passparam)
                 Tf.custom3D(points,passparam)
 
         elif trtype=="multiple":

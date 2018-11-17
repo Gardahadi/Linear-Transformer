@@ -124,8 +124,7 @@ def custom3D(points,params) :
         P[0] = X*float(params[0]) + Y*float(params[1]) + Z*float(params[2]) + float(params[3])
         P[1] = X*float(params[4]) + Y*float(params[5]) + Z*float(params[6]) + float(params[7])
         P[2] = X*float(params[8]) + Y*float(params[9]) + Z*float(params[10]) + float(params[11])
-        print(P)
-
+        
 def reflect3D(points,param) :
     if param=="xy" :
         for P in points:
