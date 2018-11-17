@@ -116,14 +116,15 @@ def rotate3D(points,deg,a,b,c) :
         P[1] = X[1]
         P[2] = X[2]
 
-def custom3D(points,a,b,c,d,e,f,g,h,i) :
+def custom3D(points,params) :
     for P in points :
         X = P[0]
         Y = P[1]
         Z = P[2]
-        P[0] = X*a + Y*b + Z*c
-        P[1] = X*d + Y*e + Z*f
-        P[2] = X*g + Y*h + Z*i
+        P[0] = X*float(params[0]) + Y*float(params[1]) + Z*float(params[2]) + float(params[3])
+        P[1] = X*float(params[4]) + Y*float(params[5]) + Z*float(params[6]) + float(params[7])
+        P[2] = X*float(params[8]) + Y*float(params[9]) + Z*float(params[10]) + float(params[11])
+        print(P)
 
 def reflect3D(points,param) :
     if param=="xy" :
