@@ -2,13 +2,7 @@
 # Q = S + Xi + Yj + Zk --> Q = [X,Y,Z,S]
 import math
 import copy
-p = [0,0,1,1]
-q=[0,math.sin(math.radians(45)),0,math.cos(math.radians(45))]
-q1=[0,-math.sin(math.radians(45)),0,math.cos(math.radians(45))]
 
-
-z=[math.sin(math.radians(45)),0,0,math.cos(math.radians(45))]
-z1=[-math.sin(math.radians(45)),0,0,math.cos(math.radians(45))]
 def productQ(Q1,Q2) :
   #Returns the product of two quaternions
 

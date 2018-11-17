@@ -14,6 +14,23 @@ cubeInit = [[100,100,100],
         [-100,100,100],
         [-100,-100,-100],
         [-100,-100,100]]
+TrapInit = [[50,50,50],
+        [50,50,-50],
+        [100,-100,100],
+        [100,-100,-100],
+        [-50,50,-50],
+        [-50,50,50],
+        [-100,-100,-100],
+        [-100,-100,100]]
+ParInit = [[200,200,200],
+        [200,100,-200],
+        [300,-100,200],
+        [100,-300,-100],
+        [-100,100,-100],
+        [-100,200,100],
+        [-200,-200,-100],
+        [-100,-100,200]]
+
 mode = ''
 rgb = [0.9,0.9,0.8]
 validCmd = ["reflect","custom","multiple","translate","dilate","rotate","shear","stretch"]
@@ -30,8 +47,18 @@ def initDraw():
         glutIdleFunc(idle)
     elif mode=='3':
         glEnable(GL_DEPTH_TEST)                                # Remove unseen faces
-        for P in cubeInit:
-            points.append([P[0],P[1],P[2]])                    # 3D Points initialization
+
+        shape = input ("Pilih bentuk yang ingin dibangun : [1]Kubus, [2]Trapezoid, [3]Whatever This is: " )
+        if shape == '1' :
+            for P in cubeInit:
+                points.append([P[0],P[1],P[2]])                    # 3D Points initialization
+        elif shape =='2' :
+            for P in TrapInit :
+                points.append([P[0],P[1],P[2]])
+        elif shape =='3' :
+            for P in ParInit :
+                points.append([P[0],P[1],P[2]])
+
         glutIdleFunc(idle)
     elif mode=='exit':
         exit()
@@ -169,6 +196,10 @@ def displayHelp():
     print("    reset		")
     print("    exit			\n")
 
+def getCredits() :
+
+    print ("Ya ini dibikin oleh Garda, Tude, dan Rojap, Makasih :)")
+
 def idle():
     global points,rgb
     #The cmd variable will store input from user
@@ -193,11 +224,15 @@ def idle():
         displayHelp()
 
     elif cmd=="exit":
+        getCredits()
         exit()
+
 
     else:
         animator(cmd)
     draw()
+
+
 
 def animator(trcommand):
     global points, frames
