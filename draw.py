@@ -254,17 +254,9 @@ def animator(trcommand):
                 d = float(d)
                 Tf.custom(points,a,b,c,d)
             elif mode=='3' :
-                a,b,c,d,e,f,g,h,i = params.split(" ")
-                a = float(a)
-                b = float(b)
-                c = float(c)
-                d = float(d)
-                e = float(e)
-                f = float(f)
-                g = float(g)
-                h = float(h)
-                i = float(i)
-                Tf.custom3D(points,a,b,c,d,e,f,g,h,i)
+                passparam = params.split(" ")
+                print(passparam)
+                Tf.custom3D(points,passparam)
 
         elif trtype=="multiple":
             n = int(params)
